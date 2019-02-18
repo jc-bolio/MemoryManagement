@@ -11,7 +11,7 @@ public class Table {
     }
 
     public int[][] generateTable() {
-        int[][] generatedTable = new int[200][4];
+        int[][] generatedTable = new int[200][3];
 
         Random rnd = new Random();
 
@@ -25,8 +25,11 @@ public class Table {
                 else if (column == 1) {
                     generatedTable[row][1] = (int) (rnd.nextGaussian() * 10 + 15);
 
-                    if(generatedTable[row][1] <= 0)
-                        generatedTable[row][1] = (generatedTable[row][1] * -1) + 1;
+                    if(generatedTable[row][1] < 0)
+                        generatedTable[row][1] = (generatedTable[row][1] * -1);
+
+                    else if(generatedTable[row][1] == 0)
+                        generatedTable[row][1] = (generatedTable[row][1] + 1);
                 }
 
                 else if (column == 2) {
@@ -34,35 +37,38 @@ public class Table {
 
                     if(generatedTable[row][2] < 0)
                         generatedTable[row][2] = generatedTable[row][2] * -1;
+
+                    else if(generatedTable[row][2] == 0)
+                        generatedTable[row][2] = (generatedTable[row][2] + 1);
                 }
 
-                else
-                    generatedTable[row][3] = generatedTable[row][2]/(generatedTable[row][1]);
             }
         }
 
-        sortbyColumn(generatedTable, 3);
+        sortbyColumn(generatedTable);
 
         return generatedTable;
     }
 
-    public static void sortbyColumn(int array[][], int column) {
+    public static void sortbyColumn(int array[][]) {
 
         Arrays.sort(array, new Comparator<int[]>() {
 
-            public int compare(final int[] entry1,
-                               final int[] entry2) {
-                if (entry1[column] < entry2[column])
-                    return 1;
-                else
-                    return -1;
+            public int compare(int[] entry1, int[] entry2) {
+                if(entry1[2] == entry2[2]){
+                    if (entry1[1] > entry2[1])
+                        return 1;
+                    else
+                        return -1;
+                }
+
+                return entry2[2] - entry1[2];
             }
         });
     }
 
-
     public int getSize(){
-        return 200;
+        return this.table.length;
     }
     public int getID(int process){
         return this.table[process][0];

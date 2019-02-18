@@ -1,15 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Main {
-
-
 
     public static void main(String[] args) {
 
         Table table = new Table();
-        table.printTable();
+        //table.printTable();
 
         Memory RP = new Memory("Registros del Procesador", 30);
         Memory L1 = new Memory("Cache L1", 120);
@@ -19,7 +16,7 @@ public class Main {
 
         List<String> row = new ArrayList<>();
 
-        for (int i = 0; i < table.getSize() - 1; i++){
+        for (int i = 0; i < table.getSize(); i++){
             int dataSize = table.getMemory(i);
 
             row.add("ID: " + table.getID(i));
