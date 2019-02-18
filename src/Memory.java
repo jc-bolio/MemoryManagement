@@ -3,6 +3,9 @@ import java.util.List;
 
 public class Memory {
 
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
     private String name;
     private int size;
     private ArrayList<String> storedData;
@@ -21,7 +24,7 @@ public class Memory {
     }
 
    public void printStoredData(){
-       System.out.println("Memoria " + this.name + ", Espacio libre: " + this.size + "u");
+       System.out.println(ANSI_BLUE + "Memoria: " + this.name + ", Espacio libre: " + this.size + "u" + ANSI_RESET);
         for (int i = 0; i < this.storedData.size(); i++){
             System.out.println(storedData.get(i));
         }
